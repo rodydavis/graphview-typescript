@@ -62,7 +62,6 @@ for (const node of graph.nodes) {
 output.appendChild(svg);
 
 const tickMs = 25;
-let tick = 0;
 setInterval(() => {
   algorithm.step(graph);
   graph.nodes.forEach((node) => {
@@ -81,5 +80,4 @@ setInterval(() => {
       element.setAttribute('y2', edge.destination.y.toString());
     }
   });
-  tick++;
 }, tickMs);
