@@ -13,13 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+
       - name: Install dependencies
         run: npm i
 
       - name: Build
         run: |
           npm run build
-          cd example && npm i && npm run build
+          cd example && npm i && npm run build &&
           touch ./example/dist/.nojekyll
       - name: Github Pages
         uses: peaceiris/actions-gh-pages@v3
