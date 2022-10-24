@@ -1,0 +1,29 @@
+{
+  "name": "graphview-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "postinstall": "npm run build",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodydavis/graphview-typescript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodydavis/graphview-typescript/issues"
+  },
+  "homepage": "https://github.com/rodydavis/graphview-typescript#readme",
+  "devDependencies": {
+    "@vitest/coverage-c8": "^0.24.3",
+    "typescript": "^4.8.4",
+    "vitest": "^0.24.3"
+  }
+}
