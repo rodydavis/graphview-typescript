@@ -71,6 +71,12 @@ export class ForceDirectedGraph extends Algorithm {
         });
     }
 
+    copyPositions(graph: Graph) {
+        graph.nodes.forEach((node) => {
+            this.displacement.set(node, node.position);
+        });
+    }
+
     step(graph: Graph) {
         this.displacement.clear();
         graph.nodes.forEach((node) => {

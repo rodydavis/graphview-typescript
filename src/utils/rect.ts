@@ -15,7 +15,7 @@
 */
 
 import type { Size } from './size';
-import type { Offset } from './offset';
+import { Offset } from './offset';
 
 /**
  * Rect represents a rectangle.
@@ -59,7 +59,15 @@ export class Rect {
         return { width: this.width, height: this.height };
     }
 
+    moveTo(x: number, y: number): Rect {
+        return new Rect(x, y, this.width, this.height);
+    }
+
     translate(x: number, y: number): Rect {
-        return new Rect(this.x + x, this.y + y, this.width, this.height);
+        return this.moveTo(this.x + x, this.y + y);
+    }
+
+    get center(): Offset {
+        return new Offset(this.x + this.width / 2, this.y + this.height / 2);
     }
 }

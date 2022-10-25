@@ -52,4 +52,14 @@ export class Offset {
     multiply(multiplier: number): Offset {
         return new Offset(this.x * multiplier, this.y * multiplier);
     }
+
+    normalize(): Offset {
+        return this.divide(this.distance);
+    }
+
+    rotate(angle: number): Offset {
+        const cos = Math.cos(angle);
+        const sin = Math.sin(angle);
+        return new Offset(this.x * cos - this.y * sin, this.x * sin + this.y * cos);
+    }
 }

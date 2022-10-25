@@ -22,8 +22,22 @@ import type { Node } from "./node";
  * The name is optional, but if it is not provided, the edge will be
  * assigned a name based on the source and target node names.
  */
-export interface Edge {
+export class Edge {
     source: Node;
     destination: Node;
-    name?: string;
+    data?: { [key: string]: any };
+
+
+    constructor(source: Node, destination: Node) {
+        this.source = source;
+        this.destination = destination;
+    }
+
+    static fromJson(nodes: Node[], data: { source: string, destination: string, name?: string, data?: { [key: string]: any }, }) {
+        const sourceNode = nodes.find(n => n.id === data.source)!;
+        const destinationNode = nodes.find(n => n.id === data.destination)!;
+        const edge = new Edge(sourceNode, destinationNode);
+        if (data.data) edge.data = data.data;
+        return edge;
+    }
 }

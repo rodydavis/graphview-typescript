@@ -14,7 +14,7 @@
  limitations under the License.
 */
 
-import type { Edge } from "./edge";
+import { Edge } from "./edge";
 import { Node } from "./node";
 
 /**
@@ -26,22 +26,9 @@ export class Graph {
     static fromJson(data: {
         nodes: { id: string }[],
         edges: { source: string, destination: string }[],
-        properties?: { [key: string]: any }
     }) {
-        const nodes = data.nodes.map(n => {
-            const node = new Node(n.id);
-            if (data.properties?.defaultNodeSize) {
-                const size = Number(data.properties.defaultNodeSize);
-                node.width = node.height = size;
-            }
-            return node;
-        });
-
-        const edges = data.edges.map(e => ({
-            source: nodes.find(n => n.id === e.source)!,
-            destination: nodes.find(n => n.id === e.destination)!
-        }));
-
+        const nodes = data.nodes.map(Node.fromJson);
+        const edges = data.edges.map(e => Edge.fromJson(nodes, e));
         return new Graph(nodes, edges);
     }
 

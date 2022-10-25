@@ -21,4 +21,4 @@ export const ATTRACTION_RATE = 0.15;
 export const ATTRACTION_PERCENTAGE = 0.15;
 export const CLUSTER_PADDING = 15;
 export const EPSILON = 0.0001;
-export const DEFAULT_NODE_SIZE = 100;
+export const DEFAULT_NODE_SIZE = 25;

@@ -16,6 +16,7 @@
 
 import { DEFAULT_NODE_SIZE } from "../utils/constants";
 import { Offset } from "../utils/offset";
+import { Rect } from "../utils/rect";
 
 /**
  * Node represents a single node in the graph.
@@ -31,13 +32,20 @@ import { Offset } from "../utils/offset";
  */
 export class Node {
     id: string;
-    name?: string;
-    position: Offset = Offset.zero;
-    width: number = DEFAULT_NODE_SIZE;
-    height: number = DEFAULT_NODE_SIZE;
+    data?: { [key: string]: any };
+    rect = new Rect(0, 0, DEFAULT_NODE_SIZE, DEFAULT_NODE_SIZE);
 
     constructor(id: string) {
         this.id = id;
+    }
+
+    static fromJson(json: any): Node {
+        const node = new Node(json.id);
+        if (json.data) node.data = json.data;
+        const o = new Offset(json.x ?? 0, json.y ?? 0);
+        const size = { width: json.width ?? DEFAULT_NODE_SIZE, height: json.height ?? DEFAULT_NODE_SIZE };
+        node.rect = new Rect(o.x, o.y, size.width, size.height);
+        return node;
     }
 
     get x() {
@@ -46,5 +54,21 @@ export class Node {
 
     get y() {
         return this.position.y;
+    }
+
+    get position() {
+        return new Offset(this.rect.x, this.rect.y);
+    }
+
+    set position(position: Offset) {
+        this.rect = new Rect(position.x, position.y, this.rect.width, this.rect.height);
+    }
+
+    get width() {
+        return this.rect.width;
+    }
+
+    get height() {
+        return this.rect.height;
     }
 }

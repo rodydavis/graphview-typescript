@@ -36,7 +36,7 @@ export abstract class Algorithm {
         this.graphHeight = height;
     }
 
-    setFocusedNode(node: Node) {
+    setFocusedNode(node: Node | null) {
         this.focusedNode = node;
     }
 }
