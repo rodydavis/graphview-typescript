@@ -40,4 +40,12 @@ export class Edge {
         if (data.data) edge.data = data.data;
         return edge;
     }
+
+    toJSON() {
+        return {
+            source: this.source.id,
+            destination: this.destination.id,
+            data: this.data,
+        };
+    }
 }

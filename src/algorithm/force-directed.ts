@@ -77,16 +77,6 @@ export class ForceDirectedGraph extends Algorithm {
         });
     }
 
-    step(graph: Graph) {
-        this.displacement.clear();
-        graph.nodes.forEach((node) => {
-            this.displacement.set(node, Offset.zero);
-        });
-        this.calculateRepulsion(graph.nodes);
-        this.calculateAttraction(graph.edges);
-        this.moveNodes(graph);
-    }
-
     moveNodes(graph: Graph) {
         graph.nodes.forEach((node) => {
             const newPosition = node.position.add(this.displacement.get(node)!);
@@ -186,6 +176,16 @@ export class ForceDirectedGraph extends Algorithm {
         this.shiftCoordinates(graph, shiftX, shiftY);
 
         return this.calculateGraphSize(graph);
+    }
+
+    step(graph: Graph) {
+        this.displacement.clear();
+        graph.nodes.forEach((node) => {
+            this.displacement.set(node, Offset.zero);
+        });
+        this.calculateRepulsion(graph.nodes);
+        this.calculateAttraction(graph.edges);
+        this.moveNodes(graph);
     }
 
     shiftCoordinates(graph: Graph, shiftX: number, shiftY: number) {

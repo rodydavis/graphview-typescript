@@ -71,4 +71,15 @@ export class Node {
     get height() {
         return this.rect.height;
     }
+
+    toJSON() {
+        return {
+            id: this.id,
+            x: this.x,
+            y: this.y,
+            width: this.width,
+            height: this.height,
+            data: this.data,
+        };
+    }
 }

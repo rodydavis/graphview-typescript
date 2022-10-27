@@ -34,11 +34,8 @@ export class Graph {
 
     toJson() {
         return {
-            nodes: this.nodes.map(n => ({ id: n.id })),
-            edges: this.edges.map(e => ({
-                source: e.source.id,
-                destination: e.destination.id
-            }))
+            nodes: this.nodes.map(n => n.toJSON()),
+            edges: this.edges.map(e =>e.toJSON()),
         };
     };
 
@@ -64,5 +61,9 @@ export class Graph {
 
     hasNodes() {
         return this.nodes.length > 0;
+    }
+
+    getNode(id: string): Node | undefined {
+        return this.nodes.find(n => n.id === id);
     }
 }
